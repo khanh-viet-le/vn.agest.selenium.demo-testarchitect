@@ -60,8 +60,8 @@
                                 <source>Common</source>
                                 <source>PageObjects</source>
                                 <source>DataObjects</source>
-                                <source>Testcases</source>
-                                <source>BusinessFlow</source>
+                                <source>TestCases</source>
+                                <source>BusinessFlows</source>
                             </sources>
                         </configuration>
                     </execution>
