@@ -1,6 +1,11 @@
 package DemoTestArchitect;
 
 import Constants.AppConstant;
+import io.qameta.allure.Allure;
+import io.qameta.allure.model.Status;
+
+import java.time.LocalDateTime;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -39,7 +44,8 @@ public class TestBase {
      */
     @AfterMethod
     public void afterMethod() {
-
+        quitBrowser();
+        AppConstant.WEBDRIVER = null;
     }
 
     /**
@@ -68,6 +74,16 @@ public class TestBase {
     }
 
     /**
+     * Quit the browser
+     */
+    private void quitBrowser() {
+        if (AppConstant.WEBDRIVER != null) {
+            AppConstant.WEBDRIVER.quit();
+        }
+    }
+
+
+    /**
      * Maximize the window of the browser
      */
     private void maximizeWindow() {
@@ -80,6 +96,53 @@ public class TestBase {
      */
     private void setWindowSize(Dimension size) {
         AppConstant.WEBDRIVER.manage().window().setSize(size);
+    }
+
+
+    /**
+     * Print step for report
+     * @param name
+     * @param runnable
+     */
+    protected void step(String name, Runnable runnable) {
+        Allure.step(name, () -> {
+            runnable.run();
+        });
+    }
+
+    /**
+     * Print step for report without runnable
+     * @param name
+     */
+    protected void step(String name) {
+        Allure.step(name);
+    }
+
+    /**
+     * Print step for report with status
+     * @param name
+     * @param status
+     */
+    protected void step(String name, Status status) {
+        Allure.step(name, status);
+    }
+
+    /**
+     * Print log for report
+     * @param name
+     * @param message
+     */
+    protected void log(String message) {
+        Allure.addAttachment(String.format("LOG at %s", LocalDateTime.now().toString()), message);
+    }
+
+     /**
+     * Print log for report
+     * @param name
+     * @param message
+     */
+    protected void log(String name, String message) {
+        Allure.addAttachment(name, message);
     }
 
     //SECTION Common flows methods
