@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * This class includes all common actions using inside the application
  */
-public class Utilities {
+public class WebDriverUtilities {
     //SECTION Elements
     /**
      * Find the element with its locator

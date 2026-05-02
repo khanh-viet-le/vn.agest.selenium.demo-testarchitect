@@ -1,3 +1,5 @@
+package DemoTestArchitect;
+
 public class HomePage extends GeneralPage{
     //SECTION Locators
 
